@@ -3,6 +3,7 @@
 use App\Livewire\EconomicGroups\Index as EconomicGroupsIndex;
 use App\Livewire\Flags\Index as FlagsIndex;
 use App\Livewire\Units\Index as UnitsIndex;
+use App\Livewire\Employees\Index as EmployeesIndex;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -41,4 +42,5 @@ Route::middleware(['auth'])->prefix('system')->name('system.')->group(function (
     Route::get('/economic-groups', EconomicGroupsIndex::class)->name('economic-groups.index');
     Route::get('/flags', FlagsIndex::class)->name('flags.index');
     Route::get('/units', UnitsIndex::class)->name('units.index');
+    Route::get('/employees', EmployeesIndex::class)->name('employees.index');
 });

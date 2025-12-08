@@ -47,6 +47,14 @@
                     {{ __('Unidades') }}
                 </flux:navlist.item>
 
+                <flux:navlist.item
+                    icon="users"
+                    :href="route('system.employees.index')"
+                    :current="request()->routeIs('system.employees.index')"
+                    wire:navigate>
+                    {{ __('Colaboradores') }}
+                </flux:navlist.item>
+
             </flux:navlist.group>
         </flux:navlist>
 
