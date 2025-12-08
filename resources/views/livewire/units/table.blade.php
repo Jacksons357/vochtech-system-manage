@@ -49,12 +49,12 @@
                     {{ $unit->flag->name }}
                 </td>
 
-                <td class="px-4 py-3">
+                <td class="px-4 py-3 flex">
                     <span class="mr-2">{{ $unit->employees->count() }}</span>
                     @if($unit->employees->count() > 0)
                     <button
-                        wire:click="$dispatch('open-flags-modal', { id: {{ $unit->id }} })"
-                        @click="console.log('clicou no botão do grupo {{ $unit->id }}')"
+                        wire:click="$dispatch('open-employees-modal', { id: {{ $unit->id }} })"
+                        @click="console.log('clicou na unidade {{ $unit->id }}')"
                         class="hover:cursor-pointer text-gray-600 hover:text-gray-500 transition flex items-center gap-1 border border-gray-500/20 px-2 rounded-lg">
                         Visualizar
                         <x-flux::icon name="eye" class="w-5 h-5" />

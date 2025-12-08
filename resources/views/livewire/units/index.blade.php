@@ -25,5 +25,6 @@
 
     <livewire:units.modal-form />
     <livewire:components.delete-modal />
+    <livewire:units.employees-modal />
 
 </div>
