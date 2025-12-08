@@ -18,7 +18,6 @@
                     @if($group->flags->count() > 0)
                     <button
                         wire:click="$dispatch('open-flags-modal', { id: {{ $group->id }} })"
-                        @click="console.log('clicou no botão do grupo {{ $group->id }}')"
                         class="hover:cursor-pointer text-gray-600 hover:text-gray-500 transition flex items-center gap-1 border border-gray-500/20 px-2 rounded-lg">
                         Visualizar
                         <x-flux::icon name="eye" class="w-5 h-5" />
