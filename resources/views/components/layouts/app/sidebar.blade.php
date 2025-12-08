@@ -15,13 +15,28 @@
 
         <flux:navlist variant="outline">
             <flux:navlist.group :heading="__('Plataforma')" class="grid">
-                <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                <flux:navlist.item
+                    icon="home"
+                    :href="route('dashboard')"
+                    :current="request()->routeIs('dashboard')"
+                    wire:navigate>
+                    {{ __('Dashboard') }}
+                </flux:navlist.item>
+
                 <flux:navlist.item
                     icon="user-group"
                     :href="route('system.economic-groups.index')"
                     :current="request()->routeIs('system.economic-groups.index')"
                     wire:navigate>
                     {{ __('Grupos Econômicos') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item
+                    icon="flag"
+                    :href="route('system.flags.index')"
+                    :current="request()->routeIs('system.flags.index')"
+                    wire:navigate>
+                    {{ __('Bandeiras') }}
                 </flux:navlist.item>
             </flux:navlist.group>
         </flux:navlist>

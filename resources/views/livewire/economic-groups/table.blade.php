@@ -17,14 +17,14 @@
                 <td class="px-4 py-3 text-right space-x-3">
                     <button
                         wire:click="$dispatch('edit-group', { id: {{ $group->id }} })"
-                        class="text-blue-600 hover:underline dark:text-blue-400 hover:cursor-pointer">
-                        <x-flux::icon name="pencil" />
+                        class="text-blue-600 hover:text-blue-800 transition hover:cursor-pointer">
+                        <x-flux::icon name="pencil" class="w-5 h-5" />
                     </button>
 
                     <button
                         wire:click="$dispatch('open-delete-modal', { id: {{ $group->id }}, modelClass: 'App\\Models\\EconomicGroup' })"
-                        class="text-red-600 hover:text-red-800 hover:cursor-pointer">
-                        <x-flux::icon name="trash" />
+                        class="text-red-600 hover:text-red-800 transition hover:cursor-pointer">
+                        <x-flux::icon name="trash" class="w-5 h-5" />
                     </button>
                 </td>
             </tr>

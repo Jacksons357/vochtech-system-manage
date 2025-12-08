@@ -19,7 +19,7 @@ class Flag extends Model
      */
     public function economicGroup()
     {
-        return $this->belongsTo(EconomicGroup::class);
+        return $this->belongsTo(EconomicGroup::class, 'economic_group_id');
     }
 
     /**
