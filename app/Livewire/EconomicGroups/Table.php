@@ -2,20 +2,21 @@
 
 namespace App\Livewire\EconomicGroups;
 
+use App\Models\EconomicGroup;
 use Illuminate\Support\Collection;
 use Livewire\Component;
 
 class Table extends Component
 {
-    public Collection $economicGroups;
-
-    public function mount(Collection $economicGroups)
-    {
-        $this->economicGroups = $economicGroups;
-    }
+    protected $listeners = [
+        'group-updated' => '$refresh',
+        'entity-deleted' => '$refresh',
+    ];
 
     public function render()
     {
-        return view('livewire.economic-groups.table');
+        return view('livewire.economic-groups.table', [
+            'economicGroups' => EconomicGroup::with('flags')->get()
+        ]);
     }
 }
