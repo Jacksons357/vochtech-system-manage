@@ -1,5 +1,6 @@
 <?php
 
+use App\Livewire\EconomicGroups\Index;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
 use App\Livewire\Settings\Profile;
@@ -32,4 +33,8 @@ Route::middleware(['auth'])->group(function () {
             ),
         )
         ->name('two-factor.show');
+});
+
+Route::middleware(['auth'])->prefix('system')->name('system.')->group(function () {
+    Route::get('/economic-groups', Index::class)->name('economic-groups.index');
 });
