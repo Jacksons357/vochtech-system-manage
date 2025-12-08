@@ -35,4 +35,5 @@
     <!-- Modals -->
     <livewire:economic-groups.modal-form />
     <livewire:components.delete-modal />
+    <livewire:economic-groups.flags-modal />
 </div>

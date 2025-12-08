@@ -13,7 +13,18 @@
             <tr class="border-b dark:border-gray-700">
                 <td class="px-4 py-3">{{ $group->created_at->format('d/m/Y \à\s H:i') }}</td>
                 <td class="px-4 py-3">{{ $group->name }}</td>
-                <td class="px-4 py-3">{{ $group->flags->count() }}</td>
+                <td class="px-4 py-3 flex items-center">
+                    <span class="mr-2">{{ $group->flags->count() }}</span>
+                    @if($group->flags->count() > 0)
+                    <button
+                        wire:click="$dispatch('open-flags-modal', { id: {{ $group->id }} })"
+                        @click="console.log('clicou no botão do grupo {{ $group->id }}')"
+                        class="hover:cursor-pointer text-gray-600 hover:text-gray-500 transition flex items-center gap-1 border border-gray-500/20 px-2 rounded-lg">
+                        Visualizar
+                        <x-flux::icon name="eye" class="w-5 h-5" />
+                    </button>
+                    @endif
+                </td>
                 <td class="px-4 py-3 text-right space-x-3">
                     <button
                         wire:click="$dispatch('edit-group', { id: {{ $group->id }} })"
