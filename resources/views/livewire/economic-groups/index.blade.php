@@ -7,7 +7,7 @@
             <input
                 type="text"
                 wire:model.live="search"
-                placeholder="Pesquisar grupos..."
+                placeholder="Pesquisar por nome..."
                 class="border rounded-lg px-3 py-2 w-full">
 
             @if($search)
