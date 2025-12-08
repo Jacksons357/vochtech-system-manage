@@ -48,13 +48,19 @@ sail up -d
 sail artisan migrate
 ```
 
-6. Instale as dependencias dentro do container
+6. Rode os seeders
+
+```bash
+sail artisan db:seed
+```
+
+7. Instale as dependencias dentro do container
 
 ```bash
 sail npm install
 ```
 
-7. Rode a aplicação
+8. Rode a aplicação
 
 ```bash
 sail npm run dev
