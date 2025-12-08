@@ -6,7 +6,7 @@
             <input
                 type="text"
                 wire:model.live="search"
-                placeholder="Pesquisar funcionários..."
+                placeholder="Pesquisar por Nome, Email, CPF ou Unidade..."
                 class="border rounded-lg px-3 py-2 w-full ">
 
             @if($search)
