@@ -4,10 +4,12 @@ namespace App\Livewire\Units;
 
 use App\Models\Flag;
 use App\Models\Unit;
+use App\Traits\ValidatesCnpj;
 use Livewire\Component;
 
 class ModalForm extends Component
 {
+    use ValidatesCnpj;
     public $showModal = false;
 
     public $editingId = null;
@@ -45,12 +47,32 @@ class ModalForm extends Component
 
     public function save()
     {
+        $messages = [
+            'nome_fantasia.required' => 'Informe o nome fantasia da unidade.',
+            'nome_fantasia.min'      => 'O nome fantasia deve ter no mínimo 2 caracteres.',
+
+            'razao_social.required'  => 'Informe a razão social da unidade.',
+            'razao_social.min'       => 'A razão social deve ter no mínimo 2 caracteres.',
+
+            'cnpj.required'          => 'Informe o CNPJ da unidade.',
+            'cnpj.min'               => 'O CNPJ deve conter pelo menos 14 números.',
+            'cnpj.max'               => 'O CNPJ deve conter no máximo 18 caracteres.',
+
+            'flag_id.required'       => 'Selecione uma bandeira.',
+            'flag_id.exists'         => 'A bandeira selecionada é inválida.',
+        ];
+
         $this->validate([
             'nome_fantasia' => 'required|min:2',
             'razao_social'  => 'required|min:2',
             'cnpj'          => 'required|min:14|max:18',
             'flag_id'       => 'required|exists:flags,id',
-        ]);
+        ], $messages);
+
+        if (!$this->validateCnpj($this->cnpj)) {
+            $this->addError('cnpj', 'O CNPJ informado é inválido.');
+            return;
+        }
 
         Unit::updateOrCreate(
             ['id' => $this->editingId],
