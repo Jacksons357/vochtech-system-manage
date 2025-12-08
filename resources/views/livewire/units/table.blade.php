@@ -9,6 +9,12 @@
                     Nome Fantasia
                 </th>
                 <th class="px-4 py-2 text-left">
+                    Razão Social
+                </th>
+                <th class="px-4 py-2 text-left">
+                    CNPJ
+                </th>
+                <th class="px-4 py-2 text-left">
                     Bandeira
                 </th>
                 <th class="px-4 py-2 text-left">
@@ -29,6 +35,14 @@
 
                 <td class="px-4 py-3">
                     {{ $unit->nome_fantasia }}
+                </td>
+
+                <td class="px-4 py-3">
+                    {{ $unit->razao_social }}
+                </td>
+
+                <td class="px-4 py-3">
+                    {{ $unit->cnpj }}
                 </td>
 
                 <td class="px-4 py-3">
