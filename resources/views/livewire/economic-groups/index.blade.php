@@ -1,7 +1,7 @@
 <div class="p-6">
 
-    <!-- Top bar -->
     <div class="flex items-center justify-between mb-6">
+
         <input
             type="text"
             wire:model.live="search"
@@ -15,12 +15,13 @@
             wire:click="$dispatch('create-group')">
             + Adicionar Grupo
         </button>
+
     </div>
 
-    <!-- Tabela -->
-    <livewire:economic-groups.table :economicGroups="$economicGroups" />
+    <!-- TABELA -->
+    <livewire:economic-groups.table
+        wire:model.live="search" />
 
-    <!-- Modal -->
     <livewire:economic-groups.modal-form />
     <livewire:components.delete-modal />
 </div>
