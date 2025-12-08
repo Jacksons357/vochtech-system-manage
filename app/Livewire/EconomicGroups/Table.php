@@ -3,36 +3,28 @@
 namespace App\Livewire\EconomicGroups;
 
 use Livewire\Component;
-use Livewire\Attributes\Modelable;
-use App\Models\EconomicGroup;
 
 class Table extends Component
 {
-    #[Modelable]
-    public $search = '';
+    public $economicGroups = [];
 
     protected $listeners = [
         'group-updated' => '$refresh',
         'entity-deleted' => '$refresh',
     ];
 
-    public function getRowsProperty()
+    public function mount($economicGroups)
     {
-        return EconomicGroup::query()
-            ->when(
-                $this->search,
-                fn($q) =>
-                $q->where('name', 'like', "%{$this->search}%")
-            )
-            ->with('flags')
-            ->latest()
-            ->get();
+        $this->economicGroups = $economicGroups;
+    }
+
+    public function updatedEconomicGroups()
+    {
+        // Só para garantir re-render
     }
 
     public function render()
     {
-        return view('livewire.economic-groups.table', [
-            'economicGroups' => $this->rows,
-        ]);
+        return view('livewire.economic-groups.table');
     }
 }
