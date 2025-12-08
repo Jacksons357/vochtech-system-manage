@@ -41,10 +41,17 @@ class ModalForm extends Component
 
     public function save()
     {
+        $messages = [
+            'name.required'             => 'Informe o nome da bandeira.',
+            'name.min'                  => 'O nome da bandeira deve ter no mínimo 2 caracteres.',
+            'economic_group_id.required' => 'Selecione um grupo econômico.',
+            'economic_group_id.exists'  => 'O grupo econômico selecionado é inválido.',
+        ];
+
         $this->validate([
-            'name' => 'required|min:2',
+            'name'              => 'required|min:2',
             'economic_group_id' => 'required|exists:economic_groups,id',
-        ]);
+        ], $messages);
 
         Flag::updateOrCreate(
             ['id' => $this->editingId],

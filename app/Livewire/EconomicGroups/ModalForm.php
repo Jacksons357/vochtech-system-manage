@@ -36,9 +36,14 @@ class ModalForm extends Component
 
     public function save()
     {
+        $messages = [
+            'name.required' => 'Informe o nome do grupo econômico.',
+            'name.min'      => 'O nome do grupo econômico deve ter no mínimo 2 caracteres.',
+        ];
+
         $this->validate([
             'name' => 'required|min:2'
-        ]);
+        ], $messages);
 
         EconomicGroup::updateOrCreate(
             ['id' => $this->editingId],
