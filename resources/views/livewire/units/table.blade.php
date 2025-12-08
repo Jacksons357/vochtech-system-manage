@@ -6,13 +6,13 @@
                     Criado em
                 </th>
                 <th class="px-4 py-2 text-left">
-                    Nome
+                    Nome Fantasia
                 </th>
                 <th class="px-4 py-2 text-left">
-                    Grupo Econômico
+                    Bandeira
                 </th>
                 <th class="px-4 py-2 text-left">
-                    Unidades
+                    Colaboradores
                 </th>
                 <th class="px-4 py-2 text-right">
                     Ações
@@ -21,26 +21,26 @@
         </thead>
 
         <tbody>
-            @foreach($flags as $flag)
+            @foreach($units as $unit)
             <tr class="border-b dark:border-gray-700">
                 <td class="px-4 py-3">
-                    {{ $flag->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y \à\s H:i') }}
+                    {{ $unit->created_at->setTimezone('America/Sao_Paulo')->format('d/m/Y \à\s H:i') }}
                 </td>
 
                 <td class="px-4 py-3">
-                    {{ $flag->name }}
+                    {{ $unit->nome_fantasia }}
                 </td>
 
                 <td class="px-4 py-3">
-                    {{ $flag->economicGroup->name }}
+                    {{ $unit->flag->name }}
                 </td>
 
-                <td class="px-4 py-3 flex">
-                    <span class="mr-2">{{ $flag->units->count() }}</span>
-                    @if($flag->units->count() > 0)
+                <td class="px-4 py-3">
+                    <span class="mr-2">{{ $unit->employees->count() }}</span>
+                    @if($unit->employees->count() > 0)
                     <button
-                        wire:click="$dispatch('open-units-modal', { id: {{ $flag->id }} })"
-                        @click="console.log('clicou na bandeira {{ $flag->id }}')"
+                        wire:click="$dispatch('open-flags-modal', { id: {{ $unit->id }} })"
+                        @click="console.log('clicou no botão do grupo {{ $unit->id }}')"
                         class="hover:cursor-pointer text-gray-600 hover:text-gray-500 transition flex items-center gap-1 border border-gray-500/20 px-2 rounded-lg">
                         Visualizar
                         <x-flux::icon name="eye" class="w-5 h-5" />
@@ -50,13 +50,13 @@
 
                 <td class="px-4 py-3 text-right space-x-3">
                     <button
-                        wire:click=" $dispatch('edit-flag', { id: {{ $flag->id }} })"
+                        wire:click=" $dispatch('edit-unit', { id: {{ $unit->id }} })"
                         class="text-blue-600 hover:text-blue-800 transition hover:cursor-pointer">
                         <x-flux::icon name="pencil" class="w-5 h-5" />
                     </button>
 
                     <button
-                        wire:click="$dispatch('open-delete-modal', { id: {{ $flag->id }}, modelClass: 'App\\Models\\Flag' })"
+                        wire:click="$dispatch('open-delete-modal', { id: {{ $unit->id }}, modelClass: 'App\\Models\\Unit' })"
                         class="text-red-600 hover:text-red-800 transition hover:cursor-pointer">
                         <x-flux::icon name="trash" class="w-5 h-5" />
                     </button>

@@ -6,7 +6,7 @@
             <input
                 type="text"
                 wire:model.live="search"
-                placeholder="Pesquisar bandeiras..."
+                placeholder="Pesquisar unidades..."
                 class="border rounded-lg px-3 py-2 w-full ">
 
             @if($search)
@@ -15,16 +15,15 @@
             @endif
         </div>
 
-        <button wire:click="$dispatch('create-flag')"
+        <button wire:click="$dispatch('create-unit')"
             class="bg-green-600 text-white px-4 py-2 rounded-lg hover:cursor-pointer">
-            + Adicionar Bandeira
+            + Adicionar Unidade
         </button>
     </div>
 
-    <livewire:flags.table :flags="$flags" wire:key="flags-{{ $flags->count() }}" />
+    <livewire:units.table :units="$units" wire:key="units-{{ $units->count() }}" />
 
-    <livewire:flags.modal-form />
+    <livewire:units.modal-form />
     <livewire:components.delete-modal />
-    <livewire:flags.units-modal />
 
 </div>

@@ -38,6 +38,15 @@
                     wire:navigate>
                     {{ __('Bandeiras') }}
                 </flux:navlist.item>
+
+                <flux:navlist.item
+                    icon="building-office"
+                    :href="route('system.units.index')"
+                    :current="request()->routeIs('system.units.index')"
+                    wire:navigate>
+                    {{ __('Unidades') }}
+                </flux:navlist.item>
+
             </flux:navlist.group>
         </flux:navlist>
 
