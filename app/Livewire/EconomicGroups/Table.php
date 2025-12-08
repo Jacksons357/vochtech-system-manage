@@ -3,28 +3,47 @@
 namespace App\Livewire\EconomicGroups;
 
 use Livewire\Component;
+use Livewire\WithPagination;
+use App\Models\EconomicGroup;
 
 class Table extends Component
 {
-    public $economicGroups = [];
+    use WithPagination;
+
+    public $search = '';
+
+    protected $queryString = [
+        'search' => ['except' => '', 'as' => 'q']
+    ];
 
     protected $listeners = [
         'group-updated' => '$refresh',
         'entity-deleted' => '$refresh',
     ];
 
-    public function mount($economicGroups)
+    public function updatingSearch()
     {
-        $this->economicGroups = $economicGroups;
+        $this->resetPage();
     }
 
-    public function updatedEconomicGroups()
+    public function clearSearch()
     {
-        // Só para garantir re-render
+        $this->search = '';
+        $this->resetPage();
     }
 
     public function render()
     {
-        return view('livewire.economic-groups.table');
+        $groups = EconomicGroup::query()
+            ->with('flags')
+            ->when($this->search, function ($query) {
+                $query->where('name', 'like', '%' . $this->search . '%');
+            })
+            ->latest()
+            ->paginate(10);
+
+        return view('livewire.economic-groups.table', [
+            'groups' => $groups
+        ]);
     }
 }
