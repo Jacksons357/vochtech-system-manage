@@ -25,7 +25,14 @@ class Index extends Component
     public function render()
     {
         $units = Unit::with('flag')
-            ->where('nome_fantasia', 'like', "%{$this->search}%")
+            ->where(function ($query) {
+                $query->where('nome_fantasia', 'like', "%{$this->search}%")
+                    ->orWhere('razao_social', 'like', "%{$this->search}%")
+                    ->orWhere('cnpj', 'like', "%{$this->search}%")
+                    ->orWhereHas('flag', function ($q) {
+                        $q->where('name', 'like', "%{$this->search}%");
+                    });
+            })
             ->orderBy('id', 'desc')
             ->get();
 
