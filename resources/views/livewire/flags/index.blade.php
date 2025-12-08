@@ -6,7 +6,7 @@
             <input
                 type="text"
                 wire:model.live="search"
-                placeholder="Pesquisar bandeiras..."
+                placeholder="Pesquisar por nome ou grupo econômico..."
                 class="border rounded-lg px-3 py-2 w-full ">
 
             @if($search)

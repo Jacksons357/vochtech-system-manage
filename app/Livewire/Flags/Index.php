@@ -25,7 +25,12 @@ class Index extends Component
     public function render()
     {
         $flags = Flag::with('economicGroup')
-            ->where('name', 'like', "%{$this->search}%")
+            ->where(function ($query) {
+                $query->where('name', 'like', "%{$this->search}%")
+                    ->orWhereHas('economicGroup', function ($q) {
+                        $q->where('name', 'like', "%{$this->search}%");
+                    });
+            })
             ->orderBy('id', 'desc')
             ->get();
 
