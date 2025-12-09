@@ -56,6 +56,14 @@
                 </flux:navlist.item>
 
                 <flux:navlist.item
+                    icon="folder-arrow-down"
+                    :href="route('system.export.reports')"
+                    :current="request()->routeIs('system.export.reports')"
+                    wire:navigate>
+                    {{ __('Exportar Relatórios') }}
+                </flux:navlist.item>
+
+                <flux:navlist.item
                     icon="list-bullet"
                     :href="route('system.logs.index')"
                     :current="request()->routeIs('system.logs.index')"
