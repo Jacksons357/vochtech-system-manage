@@ -57,6 +57,7 @@ class ModalForm extends Component
             'cnpj.required'          => 'Informe o CNPJ da unidade.',
             'cnpj.min'               => 'O CNPJ deve conter pelo menos 14 números.',
             'cnpj.max'               => 'O CNPJ deve conter no máximo 18 caracteres.',
+            'cnpj.unique'            => 'Este CNPJ já está cadastrado.',
 
             'flag_id.required'       => 'Selecione uma bandeira.',
             'flag_id.exists'         => 'A bandeira selecionada é inválida.',
@@ -65,7 +66,7 @@ class ModalForm extends Component
         $this->validate([
             'nome_fantasia' => 'required|min:2',
             'razao_social'  => 'required|min:2',
-            'cnpj'          => 'required|min:14|max:18',
+            'cnpj'          => 'required|min:14|max:18|unique:units,cnpj',
             'flag_id'       => 'required|exists:flags,id',
         ], $messages);
 

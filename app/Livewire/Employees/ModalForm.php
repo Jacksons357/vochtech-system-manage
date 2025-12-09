@@ -55,10 +55,12 @@ class ModalForm extends Component
 
             'email.required'  => 'Informe o email do funcionário.',
             'email.min'       => 'O email deve ter no mínimo 2 caracteres.',
+            'email.unique'   => 'Este email já está sendo utilizado.',
 
             'cpf.required'          => 'Informe o CPF do funcionário.',
             'cpf.min'               => 'O CPF deve conter pelo menos 11 números.',
             'cpf.max'               => 'O CPF deve conter no máximo 14 caracteres.',
+            'cpf.unique'   => 'Este CPF já está cadastrado.',
 
             'unit_id.required'       => 'Selecione uma unidade.',
             'unit_id.exists'         => 'A unidade selecionada é inválida.',
@@ -66,8 +68,8 @@ class ModalForm extends Component
 
         $this->validate([
             'name' => 'required|min:2',
-            'email'  => 'required|min:2',
-            'cpf'          => 'required|min:11|max:14',
+            'email'  => 'required|min:2|unique:employees,email',
+            'cpf'          => 'required|min:11|max:14|unique:employees,cpf',
             'unit_id'       => 'required|exists:units,id',
         ], $messages);
 
