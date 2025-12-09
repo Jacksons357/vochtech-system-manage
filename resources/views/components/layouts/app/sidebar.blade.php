@@ -55,6 +55,14 @@
                     {{ __('Colaboradores') }}
                 </flux:navlist.item>
 
+                <flux:navlist.item
+                    icon="list-bullet"
+                    :href="route('system.logs.index')"
+                    :current="request()->routeIs('system.logs.index')"
+                    wire:navigate>
+                    {{ __('Logs') }}
+                </flux:navlist.item>
+
             </flux:navlist.group>
         </flux:navlist>
 
