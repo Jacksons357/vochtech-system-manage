@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class Flag extends Model
 {
-    use HasFactory;
+    use HasFactory, LogsActivity;
 
     protected $fillable = [
         'name',
@@ -28,5 +30,18 @@ class Flag extends Model
     public function units()
     {
         return $this->hasMany(Unit::class);
+    }
+
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logOnly(['name', 'economic_group_id'])
+            ->logOnlyDirty()
+            ->useLogName('flag');
+    }
+
+    public function getDescriptionForEvent(string $eventName): string
+    {
+        return "Bandeira foi {$eventName}";
     }
 }
