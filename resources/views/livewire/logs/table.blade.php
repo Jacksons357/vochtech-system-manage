@@ -5,9 +5,32 @@
 
         <!-- Filtros -->
         <div class="flex gap-3 mb-4">
-            <input type="text" wire:model.debounce.500ms="search" placeholder="Buscar ação..." class="border rounded-lg px-3 py-2 w-full">
-            <input type="text" wire:model.debounce.500ms="userFilter" placeholder="Buscar usuário..." class="border rounded-lg px-3 py-2 w-full">
-            <input type="text" wire:model.debounce.500ms="modelFilter" placeholder="Buscar modelo..." class="border rounded-lg px-3 py-2 w-full">
+            <input type="text" wire:model.defer="search"
+                wire:keydown.enter="$refresh"
+                placeholder="Buscar ação..."
+                class="border rounded-lg px-3 py-2 w-full">
+
+            <input type="text" wire:model.defer="userFilter"
+                wire:keydown.enter="$refresh"
+                placeholder="Buscar usuário..."
+                class="border rounded-lg px-3 py-2 w-full">
+
+            <input type="text" wire:model.defer="modelFilter"
+                wire:keydown.enter="$refresh"
+                placeholder="Buscar modelo..."
+                class="border rounded-lg px-3 py-2 w-full">
+
+            <!-- Botão filtrar -->
+            <button wire:click="$refresh"
+                class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg">
+                Filtrar
+            </button>
+
+            <!-- Botão limpar -->
+            <button wire:click="clearFilters"
+                class="bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-lg">
+                Limpar
+            </button>
         </div>
 
         <!-- Tabela de logs -->

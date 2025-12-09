@@ -14,7 +14,11 @@ class Table extends Component
     public $userFilter = '';
     public $modelFilter = '';
 
-    protected $queryString = ['search', 'userFilter', 'modelFilter'];
+    protected $queryString = [
+        'search' => ['except' => '', 'as' => 'q'],
+        'userFilter' => ['except' => '', 'as' => 'uf'],
+        'modelFilter' => ['except' => '', 'as' => 'mf'],
+    ];
 
     public function updatingSearch()
     {
@@ -31,12 +35,30 @@ class Table extends Component
         $this->resetPage();
     }
 
+    public function clearFilters()
+    {
+        $this->reset(['search', 'userFilter', 'modelFilter']);
+        $this->resetPage();
+    }
+
     public function render()
     {
         $logs = Activity::with('causer')
-            ->when($this->search, fn($q) => $q->where('description', 'like', "%{$this->search}%"))
-            ->when($this->userFilter, fn($q) => $q->whereHas('causer', fn($u) => $u->where('name', 'like', "%{$this->userFilter}%")))
-            ->when($this->modelFilter, fn($q) => $q->where('subject_type', 'like', "%{$this->modelFilter}%"))
+            ->when(
+                $this->search,
+                fn($q) =>
+                $q->where('description', 'like', "%{$this->search}%")
+            )
+            ->when($this->userFilter, function ($q) {
+                $q->whereHas('causer', function ($u) {
+                    $u->where('name', 'like', "%{$this->userFilter}%");
+                });
+            })
+            ->when(
+                $this->modelFilter,
+                fn($q) =>
+                $q->where('subject_type', 'like', "%{$this->modelFilter}%")
+            )
             ->latest()
             ->paginate(10);
 
