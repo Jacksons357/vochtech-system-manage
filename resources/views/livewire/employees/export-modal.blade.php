@@ -6,8 +6,11 @@
 
             <!-- Filtros -->
             <div class="mb-4">
-                <label class="block text-sm font-medium mb-1">Filtrar por nome/email/CPF/Unidade</label>
-                <input type="text" wire:model.debounce.500ms="search" class="border rounded-lg w-full px-3 py-2">
+                <label class="block text-sm font-medium mb-1">Filtrar por Nome/Email/CPF/Unidade</label>
+                <input type="text"
+                    wire:model.debounce.500ms="search"
+                    placeholder="Digite para filtrar (deixe vazio para exportar todos)"
+                    class="border rounded-lg w-full px-3 py-2">
             </div>
 
             <!-- Botões -->
