@@ -1,5 +1,6 @@
 <?php
 
+use App\Exports\EmployeesExport;
 use App\Livewire\EconomicGroups\Index as EconomicGroupsIndex;
 use App\Livewire\Flags\Index as FlagsIndex;
 use App\Livewire\Units\Index as UnitsIndex;
@@ -10,6 +11,7 @@ use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/', function () {
     return view('welcome');
@@ -43,4 +45,11 @@ Route::middleware(['auth'])->prefix('system')->name('system.')->group(function (
     Route::get('/flags', FlagsIndex::class)->name('flags.index');
     Route::get('/units', UnitsIndex::class)->name('units.index');
     Route::get('/employees', EmployeesIndex::class)->name('employees.index');
+
+    Route::get('/export-employees', function () {
+        $search = request('search');
+        $unitId = request('unit_id');
+
+        return Excel::download(new EmployeesExport($search, $unitId), 'colaboradores.xlsx');
+    });
 });

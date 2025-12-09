@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Employees;
 
+use App\Exports\EmployeesExport;
 use App\Models\Employee;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 
 class Table extends Component
 {
