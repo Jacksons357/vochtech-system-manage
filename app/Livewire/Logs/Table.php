@@ -13,6 +13,7 @@ class Table extends Component
     public $search = '';
     public $userFilter = '';
     public $modelFilter = '';
+    public $models = [];
 
     protected $queryString = [
         'search' => ['except' => '', 'as' => 'q'],
@@ -41,6 +42,17 @@ class Table extends Component
         $this->resetPage();
     }
 
+    public function mount()
+    {
+        // Buscar todos os modelos únicos presentes nos logs
+        $this->models = Activity::select('subject_type')
+            ->distinct()
+            ->pluck('subject_type')
+            ->map(fn($type) => class_basename($type)) // só o nome do model
+            ->sort()
+            ->toArray();
+    }
+
     public function render()
     {
         $logs = Activity::with('causer')
@@ -54,11 +66,9 @@ class Table extends Component
                     $u->where('name', 'like', "%{$this->userFilter}%");
                 });
             })
-            ->when(
-                $this->modelFilter,
-                fn($q) =>
-                $q->where('subject_type', 'like', "%{$this->modelFilter}%")
-            )
+            ->when($this->modelFilter, function ($q) {
+                $q->where('subject_type', 'like', '%' . $this->modelFilter . '%');
+            })
             ->latest()
             ->paginate(10);
 
